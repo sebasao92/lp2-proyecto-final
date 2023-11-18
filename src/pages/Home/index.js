@@ -45,7 +45,7 @@ function Home() {
     return (
         <div className="home">
             <button onClick={() => setIsAgregando(true)}>Agregar Usuario</button>
-            {isAgregando && <UsuarioForm usuario={usuario} onCerrar={() => setIsAgregando(false)} onCrear={crearOActualizarUsuarioEnForm} />}
+            {isAgregando && <UsuarioForm usuarioActualizar={usuario} onCerrar={() => setIsAgregando(false)} onCrear={crearOActualizarUsuarioEnForm} />}
             <ListaUsuarios usuarios={usuarios} onEliminar={eliminarUsuario} onActualizar={mostrarFormEnActualizar}/>
         </div>
     );
