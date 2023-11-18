@@ -1,10 +1,10 @@
 import "./style.css"
 
-function UsuarioForm() {
+function UsuarioForm({ onCerrar }) {
     return (
         <div className="form-container">
             <form className="form" onSubmit={() => console.log("submitted")}>
-                <button onClick={() => console.log("cerrando")} type="button">X</button>
+                <button onClick={onCerrar} type="button">X</button>
                 <label htmlFor="form-name">Nombre:</label>
                 <input id="form-name" name="name" type="text"/>
                 <label htmlFor="form-lastname">Apellido:</label>

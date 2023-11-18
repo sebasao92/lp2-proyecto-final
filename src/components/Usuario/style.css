@@ -13,5 +13,11 @@
     width: 10rem;
     height: 10rem;
     border-radius: 50%;
-    border: 2px solid blue;
+    border:
+    2px solid blue;
+}
+
+.contenedor-usuario button {
+    width: 5rem;
+    height: 2rem;
 }
