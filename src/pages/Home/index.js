@@ -2,11 +2,12 @@ import './style.css';
 import UsuarioForm from '../../components/UsuarioForm';
 import ListaUsuarios from '../../components/ListaUsuarios';
 import { useState, useEffect } from 'react';
-import { eliminarPorId, getUsuarios } from '../../services/UsuariosService';
+import { actualizarUsuario, crearUsuario, eliminarPorId, getUsuarios } from '../../services/UsuariosService';
 
 function Home() {
     const [isAgregando, setIsAgregando] = useState(false);
     const [usuarios, setUsuarios] = useState([]);
+    const [usuario, setUsuario] = useState({});
 
     function obtenerTodosLosUsuarios() {
         getUsuarios()
@@ -24,11 +25,28 @@ function Home() {
             .catch(error => console.log(error))
     }
 
+    function crearOActualizarUsuarioEnForm(usuario) {
+        if(usuario.id == null) {
+            crearUsuario(usuario)
+                .then(() => obtenerTodosLosUsuarios())
+                .catch(error => console.log(error))
+        } else {
+            actualizarUsuario(usuario)
+                .then(() => obtenerTodosLosUsuarios())
+                .catch(error => console.log(error))
+        }
+    }
+
+    function mostrarFormEnActualizar(usuarioASerActualizado) {
+        setIsAgregando(true);
+        setUsuario(usuarioASerActualizado);
+    }
+
     return (
         <div className="home">
             <button onClick={() => setIsAgregando(true)}>Agregar Usuario</button>
-            {isAgregando && <UsuarioForm onCerrar={() => setIsAgregando(false)} />}
-            <ListaUsuarios usuarios={usuarios} onEliminar={eliminarUsuario}/>
+            {isAgregando && <UsuarioForm usuario={usuario} onCerrar={() => setIsAgregando(false)} onCrear={crearOActualizarUsuarioEnForm} />}
+            <ListaUsuarios usuarios={usuarios} onEliminar={eliminarUsuario} onActualizar={mostrarFormEnActualizar}/>
         </div>
     );
 }
