@@ -34,6 +34,7 @@ function Home() {
             actualizarUsuario(usuario)
                 .then(() => obtenerTodosLosUsuarios())
                 .catch(error => console.log(error))
+            setUsuario({});
         }
     }
 
